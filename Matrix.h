@@ -17,6 +17,8 @@ public:
     void printMatrix();
     void depopulateMatrix();
     void randomizeMatrix();
+    void eschelonForm();
+    void reducedEschelonForm();
     static bool inputIsInteger(std::string input);
 private:
     std::vector<std::vector<int>> rows;

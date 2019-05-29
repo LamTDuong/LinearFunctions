@@ -10,6 +10,7 @@
 #include <string>
 #include <sstream>		/* parsing integers */
 #include <stdlib.h>     /* rand */
+#include <time.h> 		/* for rand seed */
 #include "Matrix.h"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
@@ -111,7 +112,21 @@ void Matrix::populateMatrix()
 // Populate the matrix with random numbers
 void Matrix::randomizeMatrix()
 {
-	
+	srand (time(NULL)); // random seed every second
+	int randomInteger;
+	for (int i = 0; i < this->amountOfRows; i++)
+	{
+		for (int j = 0; j < this->amountOfColumns; j++)
+		{
+			randomInteger = rand() % 10;
+			this->rows[i][j] = randomInteger;
+		}
+	}
+}
+
+void Matrix::eschelonForm()
+{
+
 }
 
 // Check if the string is an integer
@@ -138,7 +153,7 @@ void Matrix::depopulateMatrix()
 	for (int i = 0; i < amountOfRows; i++)
 	{
 		std::vector<int> emptyRow(amountOfColumns, 0);
-		this->rows.push_back(emptyRow);
+		this->rows[i] = emptyRow;
 	}
 }
 
@@ -160,21 +175,23 @@ void Matrix::printMatrix()
 			}
 		}
 	}
+	/*
 	std::cout << "The amount of elements is: ";
 	std::cout << this->amountOfElements << std::endl;
 	std::cout << "The amount of rows is: ";
 	std::cout << this->amountOfRows << std::endl;
 	std::cout << "The amount of columns is: ";
 	std::cout << this->amountOfColumns << std::endl;
+	*/
 }
 
 int main()
 {
-	Matrix myMatrix;
-	myMatrix.populateMatrix();
-	if (Matrix::inputIsInteger("s"))
-	{
-		std::cout << "s is considered an integer. This is wrong.";
-	}
+	Matrix matrix1(3,3);
+	matrix1.populateMatrix();
+	std::cout << "" << std::endl;
+	matrix1.printMatrix();
+	matrix1.depopulateMatrix();
+	matrix1.printMatrix();
 	return 0;
 }
