@@ -15,7 +15,8 @@ public:
     Matrix(int amountOfRows, int amountOfColumns);
     void populateMatrix();
     void printMatrix();
-    void emptyMatrix();
+    void depopulateMatrix();
+    static bool inputIsInteger(std::string input);
 private:
     std::vector<std::vector<int>> rows;
     int amountOfRows;

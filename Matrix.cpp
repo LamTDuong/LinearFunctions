@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include "Matrix.h"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
@@ -30,7 +31,7 @@ Matrix::Matrix(int amountOfRows, int amountOfColumns)
 {
 	if ((amountOfRows == 0) || (amountOfColumns == 0))
 	{
-		throw std::invalid_argument("You cannot have 0 row or column in a matrix");
+		throw std::invalid_argument("You cannot have 0 row or 0 column in a matrix");
 	}
 	this->amountOfColumns = amountOfColumns;
 	this->amountOfRows = amountOfRows;
@@ -57,39 +58,58 @@ void Matrix::populateMatrix()
 	int currentColumn = 0;
 	
 	std::cout << "Please enter your data (enter 'C' without quotations to cancel): ";
-
-	// Get user inputs into a string represnting a sequence of inputs
-	while (counter <= amountOfElements)
+	while (counter < amountOfElements)
 	{
+		std::cin >> input;
 		if (input == "C")
 		{
-			std::cout << "Matrix population canceled" << std::endl;
-			inputString = "";
-			counter = 0;
-			this->depopulateMatrix();
+			std::cout << "MATRIX POPULATING CANCELED. Depopulating..." << std::endl;
+			if (counter != 0)
+			{
+				this->depopulateMatrix();
+			}
 			break;
 		}
 		else if (inputIsInteger(input))
-		{		
-			std::cin >> input;
-			counter++;
-			if (currentColumn < amountOfColumns)
+		{	
+			std::stringstream parsing(input);
+			int parsedInteger = 0;
+			parsing >> parsedInteger;
+
+			this->rows[currentRow][currentColumn] = parsedInteger;
+			if (currentColumn < amountOfColumns-1)
 			{
-				this->rows[currentRow];
+				currentColumn++;
 			}
+			else
+			{
+				currentColumn = 0;
+				currentRow++;
+			}
+			
 			std::cout << "Current matrix so far: " << std::endl;
+			counter++;
 			this->printMatrix();
+			
+			if (counter == amountOfElements)
+			{
+				std::cout <<  "MATRIX POPULATING PROCESS COMPLETE.";
+			}
+			else
+			{
+				std::cout << "Please enter your next integer: ";
+			}
+			
 		}
 		else
 		{
 			std::cout << "Please enter an integer value: ";
-			continue;
 		}
 	}
 }
 
 // Check if the string is an integer
-bool inputIsInteger(std::string input)
+bool Matrix::inputIsInteger(std::string input)
 {
 	bool isInteger = true;
 	for (int i = 0; i < input.length(); i++)
@@ -144,7 +164,11 @@ void Matrix::printMatrix()
 
 int main()
 {
-	Matrix myMatrix();
-	myMatrix.printMatrix();
+	Matrix myMatrix;
+	myMatrix.populateMatrix();
+	if (Matrix::inputIsInteger("s"))
+	{
+		std::cout << "s is considered an integer. This is wrong.";
+	}
 	return 0;
 }
