@@ -8,7 +8,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <sstream>
+#include <sstream>		/* parsing integers */
+#include <stdlib.h>     /* rand */
 #include "Matrix.h"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
@@ -99,13 +100,18 @@ void Matrix::populateMatrix()
 			{
 				std::cout << "Please enter your next integer: ";
 			}
-			
 		}
 		else
 		{
 			std::cout << "Please enter an integer value: ";
 		}
 	}
+}
+
+// Populate the matrix with random numbers
+void Matrix::randomizeMatrix()
+{
+	
 }
 
 // Check if the string is an integer

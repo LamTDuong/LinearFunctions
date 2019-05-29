@@ -16,6 +16,7 @@ public:
     void populateMatrix();
     void printMatrix();
     void depopulateMatrix();
+    void randomizeMatrix();
     static bool inputIsInteger(std::string input);
 private:
     std::vector<std::vector<int>> rows;
