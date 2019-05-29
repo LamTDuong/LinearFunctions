@@ -13,7 +13,9 @@ class Matrix
 public:
     Matrix();
     Matrix(int amountOfRows, int amountOfColumns);
+    void populateMatrix();
     void printMatrix();
+    void emptyMatrix();
 private:
     std::vector<std::vector<int>> rows;
     int amountOfRows;
