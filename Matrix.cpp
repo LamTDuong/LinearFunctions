@@ -47,6 +47,7 @@ Matrix::Matrix(int amountOfRows, int amountOfColumns)
 }
 
 // Populate the matrix with user inputs
+// Calls on inputIsInteger() member function
 void Matrix::populateMatrix()
 {
 	std::string input;
@@ -110,6 +111,7 @@ void Matrix::populateMatrix()
 }
 
 // Populate the matrix with random numbers
+// Seed is every second
 void Matrix::randomizeMatrix()
 {
 	srand (time(NULL)); // random seed every second
@@ -124,8 +126,49 @@ void Matrix::randomizeMatrix()
 	}
 }
 
-void Matrix::eschelonForm()
+// Check to see if the matrix is in echelon form
+bool Matrix::isEchelonForm()
 {
+	bool isEchelonForm = true;
+	int currentPivotColumn = -1;
+	for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
+	{
+		for (int columnIndex = 0; columnIndex < amountOfColumns; columnIndex++)
+		{
+			if (this->rows[rowIndex][columnIndex] != 0)
+			{	
+				// If it's a a non-zero entry before or on the current pivot column, return false
+				if (columnIndex <= currentPivotColumn)
+				{
+					isEchelonForm = false;
+					goto endOfCheck;
+				}
+				else if (columnIndex > currentPivotColumn))
+				{
+					currentPivotColumn = columnIndex;
+					break;
+				}
+			}
+
+			
+			// If last column and is still 0 , this means this is zero row.
+			// Set pivot column to amountOfColumns + 1 so that if there's a new non-zero
+			// row, it will return false
+			if ((columnIndex == amountOfColumns-1) && (this->rows[rowIndex][columnIndex] == 0))
+			{
+				currentPivotColumn = amountOfColumns + 1;
+			}
+		}
+		endOfCheck:
+			break;
+	}
+	return isEchelonForm;
+}
+
+// This function will reduce the Matrix to a echelon form
+void Matrix::echelonForm()
+{
+	// Check if it's already in echelon form first?
 
 }
 
@@ -191,7 +234,14 @@ int main()
 	matrix1.populateMatrix();
 	std::cout << "" << std::endl;
 	matrix1.printMatrix();
-	matrix1.depopulateMatrix();
-	matrix1.printMatrix();
+	if (matrix1.isEchelonForm())
+	{
+		std::cout << "The matrix is in echelon form";
+	}
+	else
+	{
+		std::cout << "The matrix is NOT in ehecelon form";
+	}
+	
 	return 0;
 }

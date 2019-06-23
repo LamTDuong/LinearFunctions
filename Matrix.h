@@ -17,11 +17,14 @@ public:
     void printMatrix();
     void depopulateMatrix();
     void randomizeMatrix();
-    void eschelonForm();
-    void reducedEschelonForm();
+    bool isEchelonForm();
+    void echelonForm();
+    void reducedEchelonForm();
+    bool isReducedEchelonForm();
     static bool inputIsInteger(std::string input);
 private:
     std::vector<std::vector<int>> rows;
+    std::vector<std::vector<int>> columns; // TODO: Implement the 
     int amountOfRows;
     int amountOfColumns;
     int amountOfElements;
