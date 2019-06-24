@@ -28,7 +28,7 @@ Matrix::Matrix()
 	}
 }
 
-// Matrix overloading constructor that takes in 2 ints (row, column)
+// Matrix overloading cconstructor that takes in 2 ints (row, column)
 Matrix::Matrix(int amountOfRows, int amountOfColumns)
 {
 	if ((amountOfRows == 0) || (amountOfColumns == 0))
@@ -143,15 +143,14 @@ bool Matrix::isEchelonForm()
 					isEchelonForm = false;
 					goto endOfCheck;
 				}
-				else if (columnIndex > currentPivotColumn))
+				else if (columnIndex > currentPivotColumn)
 				{
 					currentPivotColumn = columnIndex;
 					break;
 				}
 			}
 
-			
-			// If last column and is still 0 , this means this is zero row.
+			// If last column and is still 0 , this means this is a zero row.
 			// Set pivot column to amountOfColumns + 1 so that if there's a new non-zero
 			// row, it will return false
 			if ((columnIndex == amountOfColumns-1) && (this->rows[rowIndex][columnIndex] == 0))
@@ -218,30 +217,31 @@ void Matrix::printMatrix()
 			}
 		}
 	}
-	/*
-	std::cout << "The amount of elements is: ";
-	std::cout << this->amountOfElements << std::endl;
-	std::cout << "The amount of rows is: ";
-	std::cout << this->amountOfRows << std::endl;
-	std::cout << "The amount of columns is: ";
-	std::cout << this->amountOfColumns << std::endl;
-	*/
 }
 
-int main()
+/*
+* Function: toString()
+* Author: Lam Duong
+* Description: convert the matrix to a string.
+*/
+std::string Matrix::toString()
 {
-	Matrix matrix1(3,3);
-	matrix1.populateMatrix();
-	std::cout << "" << std::endl;
-	matrix1.printMatrix();
-	if (matrix1.isEchelonForm())
+	std::string stringOfMatrix;
+	for (int i = 0; i < this->amountOfRows; i++)
 	{
-		std::cout << "The matrix is in echelon form";
+		for (int j = 0; j < this->amountOfColumns; j++)
+		{
+			if (j == this->amountOfColumns - 1)
+			{
+				stringOfMatrix.append(this->rows[i][j]);
+				stringOfMatrix.append("\n");
+			}
+			else
+			{
+				stringOfMatrix.append(this->rows[i][j]);
+				stringOfMatrix.append(" ");
+			}
+		}
 	}
-	else
-	{
-		std::cout << "The matrix is NOT in ehecelon form";
-	}
-	
-	return 0;
 }
+

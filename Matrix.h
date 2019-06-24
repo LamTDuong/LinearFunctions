@@ -21,6 +21,7 @@ public:
     void echelonForm();
     void reducedEchelonForm();
     bool isReducedEchelonForm();
+	std::string toString();
     static bool inputIsInteger(std::string input);
 private:
     std::vector<std::vector<int>> rows;
