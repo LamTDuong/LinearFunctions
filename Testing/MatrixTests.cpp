@@ -6,7 +6,7 @@ TEST_CASE("EmptyMatrixConstructioNTests")
 {
 	Matrix matrix1(1, 1);
 	matrix1.populateMatrix();
-	REQUIRE(matrix1.toString() ==  )
+	REQUIRE(matrix1.toString() == "0");
 }
 
 
