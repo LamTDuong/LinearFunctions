@@ -233,15 +233,20 @@ std::string Matrix::toString()
 		{
 			if (j == this->amountOfColumns - 1)
 			{
-				stringOfMatrix.append(this->rows[i][j]);
+				stringOfMatrix.append(std::to_string(this->rows[i][j]));
 				stringOfMatrix.append("\n");
 			}
 			else
 			{
-				stringOfMatrix.append(this->rows[i][j]);
+				stringOfMatrix.append(std::to_string(this->rows[i][j]));
 				stringOfMatrix.append(" ");
 			}
 		}
 	}
+	return stringOfMatrix;
 }
 
+int main()
+{
+	return 0;
+}

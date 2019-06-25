@@ -1,4 +1,5 @@
 #include "../Matrix.h"
+#include "../Matrix.cpp"
 #include <string>
 #include "catch2.hpp"
 
