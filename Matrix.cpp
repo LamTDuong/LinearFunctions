@@ -127,7 +127,15 @@ void Matrix::randomizeMatrix()
 	}
 }
 
-// Check to see if the matrix is in echelon form
+/*
+ * Function: isEchelonForm()
+ * Return: boolean
+ * Author: Lam Duong
+ * Description: This member function will check if the current matrix
+ * 				is in the echelon form. Return true if so. False if not so.
+ * 				NOTE: This may not be the most optimized way to go about checking
+ * 				for echelon form. Find a better way in your own time?
+ */
 bool Matrix::isEchelonForm()
 {
 	bool isEchelonForm = true;
@@ -165,11 +173,51 @@ bool Matrix::isEchelonForm()
 	return isEchelonForm;
 }
 
-// This function will reduce the Matrix to a echelon form
+/*
+ * Function: echelonForm()
+ * Parameters:  none
+ * Return: void
+ * Author: Lam Duong
+ * Description: this member function will rearrange the referenced matrix
+ * 				to a matrix in an echelon form
+ */
 void Matrix::echelonForm()
 {
-	// Check if it's already in echelon form first?
+	while (this->isEchelonForm() == false)
+	{
+		for (int rowIndex = 0; rowIndex < this->amountOfRows; rowIndex++)
+		{
 
+		}
+	}
+}
+
+/*
+ * Function: rowAddition()
+ * Parameters: 	(vector, vector, int, int)
+ * Return: vector
+ * Author: Lam Duong
+ * Description: This member function will add the multiple of the first row
+ * 				to the second row for row reduction. This member function should
+ * 				copy the values of the rows, so that if addition cannot be done,
+ * 				then the changes are then reverted. Make sure that the index
+ * 				is the place where addition would start. If adding the entire row,
+ * 				enter '0'.
+ */
+std:vector<int> Matrix::rowReduction(std::vector<int> row1, std::vector<int>row2, int index)
+{
+	if (row1.size() != row2.size())
+	{
+		// TODO: throw error: need both vectors to have the same size
+	}
+	std::vector<int> resultingVector = row2;
+	int multiple = -(row2[index]) / row1[index];
+	for (int rowIndex = index; rowIndex < row2.size(); rowIndex++)
+	{
+		int resultingAddition = (row1[rowIndex] * multiple) + row2[rowIndex];
+		resultingVector[index] = resultingAddition;
+	}
+	return resultingVector;
 }
 
 // Check if the string is an integer
@@ -222,8 +270,10 @@ void Matrix::printMatrix()
 
 /*
 * Function: toString()
+* Parameters: none
+* Return: string
 * Author: Lam Duong
-* Description: convert the matrix to a string.
+* Description: Simply turn the matrix into a string representation.
 */
 std::string Matrix::toString()
 {
@@ -249,5 +299,6 @@ std::string Matrix::toString()
 
 int main()
 {
+	Matrix matrix1(1, 1);
 	return 0;
 }
