@@ -11,8 +11,13 @@
 class Matrix
 {
 public:
+	// Constructors:
     Matrix();
     Matrix(int amountOfRows, int amountOfColumns);
+	// Accessors:
+	int getAmountOfRows();
+	int getAmountOfColumns();
+	// Mutators and others:
     void populateMatrix();
     void printMatrix();
     void depopulateMatrix();

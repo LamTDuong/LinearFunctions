@@ -51,10 +51,9 @@ Matrix::Matrix(int amountOfRows, int amountOfColumns)
  * Parameters: none
  * Return: void
  * Author: Lam Duong
- * Description: This member function will check if the current matrix
- * 				is in the echelon form. Return true if so. False if not so.
- * 				NOTE: This may not be the most optimized way to go about checking
- * 				for echelon form. Find a better way in your own time?
+ * Description: This member function will populate the matrix via the console.
+				NOTE: DO NOT use this function in GUI unless there's a good way
+				about in doing so.
  */
 void Matrix::populateMatrix()
 {
@@ -117,9 +116,14 @@ void Matrix::populateMatrix()
 		}
 	}
 }
-
-// Populate the matrix with random numbers
-// Seed is every second
+/*
+ * Function: randomizeMatrix()
+ * Return: boolean
+ * Author: Lam Duong
+ * Description: Populate the matrix with random numbers generated
+				by an RNG with a seed of the seconds that have passed
+				since 01/01/1970
+ */
 void Matrix::randomizeMatrix()
 {
 	srand (time(NULL)); // random seed every second
@@ -200,7 +204,7 @@ void Matrix::echelonForm()
 }
 
 /*
- * Function: rowAddition()
+ * Function: rowReduction()
  * Parameters: 	(vector, vector, int, int)
  * Return: vector
  * Author: Lam Duong
@@ -242,7 +246,14 @@ bool Matrix::inputIsInteger(std::string input)
 	return isInteger;
 }
 
-// Empty the matrix by entering zeros into everything
+/*
+ * Function: depopulateMatrix()
+ * Parameters: none
+ * Return: void
+ * Author: Lam Duong
+ * Description: This function will depopulate a matrix by returning it to its
+				original state with 0's.
+ */
 void Matrix::depopulateMatrix()
 {
 	int amountOfRows = this->amountOfRows;
@@ -256,7 +267,7 @@ void Matrix::depopulateMatrix()
 }
 
 /*
- * Function: print()
+ * Function: printMatrix()
  * Parameters: none
  * Return: void
  * Author: Lam Duong
@@ -313,3 +324,14 @@ std::string Matrix::toString()
 	}
 	return stringOfMatrix;
 }
+
+int Matrix::getAmountOfRows()
+{
+	return this->amountOfRows;
+}
+
+int Matrix::getAmountOfColumns()
+{
+	return this->amountOfColumns;
+}
+
