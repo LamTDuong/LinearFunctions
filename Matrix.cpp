@@ -11,7 +11,7 @@
 #include <sstream>		/* parsing integers */
 #include <stdlib.h>     /* rand */
 #include <time.h> 		/* for rand seed */
-#include "Matrix.h"
+#include "Matrix.hpp"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
 Matrix::Matrix()
