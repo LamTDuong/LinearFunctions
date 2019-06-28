@@ -303,11 +303,3 @@ std::string Matrix::toString()
 	}
 	return stringOfMatrix;
 }
-
-int main()
-{
-	Matrix matrix1(1, 1);
-	std::cout << "This is the output of matrix1(1,1):\n";
-	std::cout << matrix1.toString();
-	return 0;
-}
