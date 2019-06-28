@@ -255,7 +255,14 @@ void Matrix::depopulateMatrix()
 	}
 }
 
-// Printing for debugging
+/*
+ * Function: print()
+ * Parameters: none
+ * Return: void
+ * Author: Lam Duong
+ * Description: This method simply print the matrix out onto a console.
+ *				Useful for early development. WARNING: Potential dead code.
+ */
 void Matrix::printMatrix()
 {
 	for (int i = 0; i < this->amountOfRows; i++)
@@ -280,7 +287,10 @@ void Matrix::printMatrix()
 * Parameters: none
 * Return: string
 * Author: Lam Duong
-* Description: Simply turn the matrix into a string representation.
+* Description:	Simply turn the matrix into a string representation. Used
+*				for debugging and testing purposes. This method currently
+				will only return an unformatted matrix.
+				TODO: Implement a toString method where 
 */
 std::string Matrix::toString()
 {
