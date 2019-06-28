@@ -11,7 +11,6 @@
 #include <sstream>		/* parsing integers */
 #include <stdlib.h>     /* rand */
 #include <time.h> 		/* for rand seed */
-#include "pch.h"		/* for testing purposes*/
 #include "Matrix.h"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
@@ -47,8 +46,16 @@ Matrix::Matrix(int amountOfRows, int amountOfColumns)
 	}
 }
 
-// Populate the matrix with user inputs
-// Calls on inputIsInteger() member function
+/*
+ * Function: populateMatrix()
+ * Parameters: none
+ * Return: void
+ * Author: Lam Duong
+ * Description: This member function will check if the current matrix
+ * 				is in the echelon form. Return true if so. False if not so.
+ * 				NOTE: This may not be the most optimized way to go about checking
+ * 				for echelon form. Find a better way in your own time?
+ */
 void Matrix::populateMatrix()
 {
 	std::string input;
@@ -204,11 +211,11 @@ void Matrix::echelonForm()
  * 				is the place where addition would start. If adding the entire row,
  * 				enter '0'.
  */
-std:vector<int> Matrix::rowReduction(std::vector<int> row1, std::vector<int>row2, int index)
+std::vector<int> Matrix::rowReduction(std::vector<int> row1, std::vector<int>row2, int index)
 {
 	if (row1.size() != row2.size())
 	{
-		// TODO: throw error: need both vectors to have the same size
+		throw std::invalid_argument("Cannot have two rows that are not the same size");
 	}
 	std::vector<int> resultingVector = row2;
 	int multiple = -(row2[index]) / row1[index];
@@ -300,5 +307,7 @@ std::string Matrix::toString()
 int main()
 {
 	Matrix matrix1(1, 1);
+	std::cout << "This is the output of matrix1(1,1):\n";
+	std::cout << matrix1.toString();
 	return 0;
 }

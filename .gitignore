@@ -1,7 +1,11 @@
+/.gitignore
 /.vscode
 /.vs
 /a.exe
 /a.out
+/catch2
 /Testing
-/VisualStudio
-/LinearFunctionsTests
+/LineFunc.sln
+/LineFunc.vcxproj
+/LineFunc.vcxproj.filters
+/LineFunc.vcxproj.user
