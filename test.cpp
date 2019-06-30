@@ -7,7 +7,7 @@
  *				run these test cases. Contact Lam Duong for more information.
 */
 
-#include "pch.h"
+//#include "pch.h"
 #include "../LinearFunctions/Matrix.hpp"
 #include "../LinearFunctions/Matrix.cpp"
 

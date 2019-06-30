@@ -194,13 +194,41 @@ bool Matrix::isEchelonForm()
  */
 void Matrix::echelonForm()
 {
+	//-----------------------FORWARD PHASE-----------------------------------
+	/*
+	1) Begin with the leftmost nonzero column. This is a pivot column.
+	The pivot position is at the top.
+	*/
 	while (this->isEchelonForm() == false)
 	{
 		for (int rowIndex = 0; rowIndex < this->amountOfRows; rowIndex++)
 		{
-
+			if (this->rows[rowIndex][columnIndex] != 0)
+			{
+				
+			}
 		}
 	}
+	/*
+	2) Select a nonzero entry in the pivot column as a pivot. If necessary,
+	interchange rows to move this entry into the pivot position.
+ 	*/
+ 	/*
+	3) Use row addition operations to create zeros in all positions below the pivot.
+	*/
+	
+	/*
+	4) Cover (or ignore) the row containing the pivot position and cover
+	all rows, if any, above it. apply steps 1-3 to the submatrix that remains.
+	Repeat the process until there are no more nonzero rows to modify.
+	*/
+
+	//---------------------------BACKWARD PHASE-----------------------------
+
+	/*
+	Beginning with the rightmost pivot and working upward and to the left,
+	create zeros above each pivot. If a pivot is not 1, make it 1 by a scaling operation.
+	*/
 }
 
 /*
@@ -325,6 +353,7 @@ std::string Matrix::toString()
 	return stringOfMatrix;
 }
 
+/* ACCESSOR MEMBFER FUNCTIONS */
 int Matrix::getAmountOfRows()
 {
 	return this->amountOfRows;
