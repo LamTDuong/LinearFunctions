@@ -198,30 +198,37 @@ void Matrix::echelonForm()
 	if (this->isEchelonForm() == false)
 	{
 		//-----------------------FORWARD PHASE-----------------------------------
-		/*
+
+		/*							STEP 1:
 		1) Begin with the leftmost nonzero column. This is a pivot column.
-		The pivot position is at the top.
+		The pivot position should be at the top.
 		*/
 		
 		// Find the leftmost nonzero column
-		int leftMostColumn = -1;
-		std::vector<int> rowsWithLeftMostColumns;
+		int leftMostColumn = amountOfColumns; // set left-most column to the last column initially
+		std::vector<std::vector<float>> pivotRows;
+		std::vector<int> pivotRowIndices;
 		for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
 		{
 			for (int columnIndex = 0; columnIndex < amountOfColumns; columnIndex++)
 			{
-				if (rows[rowIndex][columnIndex] != 0)
+				if ((rows[rowIndex][columnIndex] != 0) && (columnIndex < leftMostColumn))
 				{
 					leftMostColumn = columnIndex;
-					rowsWithLeftMostColumns.push_back(rowIndex);
+					pivotRows.push_back(rows[rowIndex]);
+					pivotRowIndices.push_back(rowIndex);
 				}
 			}
 		}
+		// Determine one row to be the pivot row
+		std::vector<float> pivotRow;
+		for (int rowIndex = 0; rowIndex < pivotRows.size(); rowIndex++)
+		{
+			
+		}
+		// Move row tha row to the top
 
-		// Determine one column to be the pivot column
-		// Move pivot column to the top
-
-		/*
+		/*							STEP 2:
 		2) Select a nonzero entry in the pivot column as a pivot. If necessary,
 		interchange rows to move this entry into the pivot position.
 		*/
