@@ -26,12 +26,12 @@ public:
     void echelonForm();
     void reducedEchelonForm();
     bool isReducedEchelonForm();
-    std::vector<int> rowReduction(std::vector<int> row1, std::vector<int> row2, int index);
+    std::vector<float> rowReduction(std::vector<float> row1, std::vector<float> row2, int index);
 	std::string toString();
     static bool inputIsInteger(std::string input);
 private:
-    std::vector<std::vector<int>> rows;
-    std::vector<std::vector<int>> columns; // TODO: Implement the 
+    std::vector<std::vector<float>> rows;
+    std::vector<std::vector<float>> columns; // TODO: Implement the 
     int amountOfRows;
     int amountOfColumns;
     int amountOfElements;

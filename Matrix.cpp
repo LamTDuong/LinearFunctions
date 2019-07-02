@@ -23,7 +23,7 @@ Matrix::Matrix()
 	// Populating the matrix with 0's
 	for (int i = 0; i < 5; i++)
 	{
-		std::vector<int> emptyRow(5,0);
+		std::vector<float> emptyRow(5,0);
 		this->rows.push_back(emptyRow);
 	}
 }
@@ -41,7 +41,7 @@ Matrix::Matrix(int amountOfRows, int amountOfColumns)
 	// Populating the matrix with 0's 
 	for (int i = 0; i < amountOfRows; i++)
 	{
-		std::vector<int> emptyRow(amountOfColumns, 0);
+		std::vector<float> emptyRow(amountOfColumns, 0);
 		this->rows.push_back(emptyRow);
 	}
 }
@@ -83,7 +83,7 @@ void Matrix::populateMatrix()
 		else if (inputIsInteger(input))
 		{	
 			std::stringstream parsing(input);
-			int parsedInteger = 0;
+			float parsedInteger = 0;
 			parsing >> parsedInteger;
 
 			this->rows[currentRow][currentColumn] = parsedInteger;
@@ -133,7 +133,7 @@ void Matrix::randomizeMatrix()
 		for (int j = 0; j < this->amountOfColumns; j++)
 		{
 			randomInteger = rand() % 10;
-			this->rows[i][j] = randomInteger;
+			this->rows[i][j] = float(randomInteger);
 		}
 	}
 }
@@ -190,45 +190,58 @@ bool Matrix::isEchelonForm()
  * Return: void
  * Author: Lam Duong
  * Description: this member function will rearrange the referenced matrix
- * 				to a matrix in an echelon form
+ * 				to a matrix in an echelon form. The comments in the function member
+ * 				contain the steps for the algorithm.
  */
 void Matrix::echelonForm()
 {
-	//-----------------------FORWARD PHASE-----------------------------------
-	/*
-	1) Begin with the leftmost nonzero column. This is a pivot column.
-	The pivot position is at the top.
-	*/
-	while (this->isEchelonForm() == false)
+	if (this->isEchelonForm() == false)
 	{
-		for (int rowIndex = 0; rowIndex < this->amountOfRows; rowIndex++)
+		//-----------------------FORWARD PHASE-----------------------------------
+		/*
+		1) Begin with the leftmost nonzero column. This is a pivot column.
+		The pivot position is at the top.
+		*/
+		
+		// Find the leftmost nonzero column
+		int leftMostColumn = -1;
+		std::vector<int> rowsWithLeftMostColumns;
+		for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
 		{
-			if (this->rows[rowIndex][columnIndex] != 0)
+			for (int columnIndex = 0; columnIndex < amountOfColumns; columnIndex++)
 			{
-				
+				if (rows[rowIndex][columnIndex] != 0)
+				{
+					leftMostColumn = columnIndex;
+					rowsWithLeftMostColumns.push_back(rowIndex);
+				}
 			}
 		}
+
+		// Determine one column to be the pivot column
+		// Move pivot column to the top
+
+		/*
+		2) Select a nonzero entry in the pivot column as a pivot. If necessary,
+		interchange rows to move this entry into the pivot position.
+		*/
+		/*
+		3) Use row addition operations to create zeros in all positions below the pivot.
+		*/
+		
+		/*
+		4) Cover (or ignore) the row containing the pivot position and cover
+		all rows, if any, above it. apply steps 1-3 to the submatrix that remains.
+		Repeat the process until there are no more nonzero rows to modify.
+		*/
+
+		//---------------------------BACKWARD PHASE-----------------------------
+
+		/*
+		Beginning with the rightmost pivot and working upward and to the left,
+		create zeros above each pivot. If a pivot is not 1, make it 1 by a scaling operation.
+		*/
 	}
-	/*
-	2) Select a nonzero entry in the pivot column as a pivot. If necessary,
-	interchange rows to move this entry into the pivot position.
- 	*/
- 	/*
-	3) Use row addition operations to create zeros in all positions below the pivot.
-	*/
-	
-	/*
-	4) Cover (or ignore) the row containing the pivot position and cover
-	all rows, if any, above it. apply steps 1-3 to the submatrix that remains.
-	Repeat the process until there are no more nonzero rows to modify.
-	*/
-
-	//---------------------------BACKWARD PHASE-----------------------------
-
-	/*
-	Beginning with the rightmost pivot and working upward and to the left,
-	create zeros above each pivot. If a pivot is not 1, make it 1 by a scaling operation.
-	*/
 }
 
 /*
@@ -243,23 +256,30 @@ void Matrix::echelonForm()
  * 				is the place where addition would start. If adding the entire row,
  * 				enter '0'.
  */
-std::vector<int> Matrix::rowReduction(std::vector<int> row1, std::vector<int>row2, int index)
+std::vector<float> Matrix::rowReduction(std::vector<float> row1, std::vector<float>row2, int index)
 {
 	if (row1.size() != row2.size())
 	{
 		throw std::invalid_argument("Cannot have two rows that are not the same size");
 	}
-	std::vector<int> resultingVector = row2;
+	std::vector<float> resultingVector = row2;
 	int multiple = -(row2[index]) / row1[index];
 	for (int rowIndex = index; rowIndex < row2.size(); rowIndex++)
 	{
 		int resultingAddition = (row1[rowIndex] * multiple) + row2[rowIndex];
-		resultingVector[index] = resultingAddition;
+		resultingVector[index] = float(resultingAddition);
 	}
 	return resultingVector;
 }
 
-// Check if the string is an integer
+/*
+ * Function: inputIsInteger()
+ * Parameters: string
+ * Return: boolean
+ * Author: Lam Duong
+ * Description: Check if the input (which is a string) is an integer.
+ * 				This member fucntion is used by populateMatrix().
+ */
 bool Matrix::inputIsInteger(std::string input)
 {
 	bool isInteger = true;
@@ -289,7 +309,7 @@ void Matrix::depopulateMatrix()
 	// Populating the matrix with 0's 
 	for (int i = 0; i < amountOfRows; i++)
 	{
-		std::vector<int> emptyRow(amountOfColumns, 0);
+		std::vector<float> emptyRow(amountOfColumns, 0);
 		this->rows[i] = emptyRow;
 	}
 }
