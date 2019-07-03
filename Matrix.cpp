@@ -5,6 +5,7 @@
  *      Author: Lam Duong
  */
 
+#define CATCH_CONFIG_MAIN
 #include <iostream>
 #include <vector>
 #include <string>
@@ -390,4 +391,3 @@ int Matrix::getAmountOfColumns()
 {
 	return this->amountOfColumns;
 }
-
