@@ -10,3 +10,4 @@
 /LineFunc.vcxproj.filters
 /LineFunc.vcxproj.user
 /*.o
+/tests
