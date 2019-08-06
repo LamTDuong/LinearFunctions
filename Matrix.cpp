@@ -119,7 +119,7 @@ void Matrix::populateMatrix()
 }
 /*
  * Function: randomizeMatrix()
- * Return: boolean
+ * Return: void
  * Author: Lam Duong
  * Description: Populate the matrix with random numbers generated
 				by an RNG with a seed of the seconds that have passed
