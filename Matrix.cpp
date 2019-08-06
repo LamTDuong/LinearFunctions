@@ -381,7 +381,7 @@ std::string Matrix::toString()
 	return stringOfMatrix;
 }
 
-/* ACCESSOR MEMBFER FUNCTIONS */
+/* ACCESSOR MEMBER FUNCTIONS */
 int Matrix::getAmountOfRows()
 {
 	return this->amountOfRows;
