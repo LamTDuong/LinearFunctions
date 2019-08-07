@@ -29,9 +29,10 @@ public:
     std::vector<float> rowReduction(std::vector<float> row1, std::vector<float> row2, int index);
 	std::string toString();
     static bool inputIsInteger(std::string input);
+    void insertAt(float number, int rowIndex, int columnIndex);
 private:
     std::vector<std::vector<float>> rows;
-    std::vector<std::vector<float>> columns; // TODO: Implement the 
+    std::vector<std::vector<float>> columns; // TODO: Implement this? 
     int amountOfRows;
     int amountOfColumns;
     int amountOfElements;

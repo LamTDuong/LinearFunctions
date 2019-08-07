@@ -52,6 +52,7 @@ TEST_CASE("Constructor tests", "[Matrix]")
 
 // NOTE: Test case running randomize matrix function 4 times that wait
 // for 1 second each. With 2 randomize functions, expect test to run for 8 seconds.
+/*
 TEST_CASE("Ranomize Matrix Tests", "[Matrix]")
 {
 	Matrix matrix1(1, 1);
@@ -113,8 +114,20 @@ TEST_CASE("Ranomize Matrix Tests", "[Matrix]")
 
 	std::cout << "All randomizeMatrix() test cases passed!" << std::endl;
 }
+*/
 
-TEST_CASE("isEchelonForm() Tests", "[Matrix]")
+TEST_CASE("isEchelonForm() Tests")
 {
-	
+	Matrix matrix1;
+	matrix1.insertAt(float(1),0,0);
+	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(1),1,0);
+	std::string matrixStringCheck = matrix1.toString();
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(0),1,0);
+	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(1),4,1);
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(2),0,2);
+	REQUIRE(matrix1.isEchelonForm() == true);
 }

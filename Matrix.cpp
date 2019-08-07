@@ -151,22 +151,22 @@ void Matrix::randomizeMatrix()
 bool Matrix::isEchelonForm()
 {
 	bool isEchelonForm = true;
-	int currentPivotColumn = -1;
+	int lastPivotEntryColumn = -1;
 	for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
 	{
 		for (int columnIndex = 0; columnIndex < amountOfColumns; columnIndex++)
 		{
 			if (this->rows[rowIndex][columnIndex] != 0)
 			{	
-				// If it's a a non-zero entry before or on the current pivot column, return false
-				if (columnIndex <= currentPivotColumn)
+				// If it's a a non-zero entry before or on the last pivot entry, return false
+				if (columnIndex <= lastPivotEntryColumn)
 				{
 					isEchelonForm = false;
-					goto endOfCheck;
+					goto endOfCheck; // to break out of double loop
 				}
-				else if (columnIndex > currentPivotColumn)
+				else if (columnIndex > lastPivotEntryColumn)
 				{
-					currentPivotColumn = columnIndex;
+					lastPivotEntryColumn = columnIndex;
 					break;
 				}
 			}
@@ -176,14 +176,14 @@ bool Matrix::isEchelonForm()
 			// row, it will return false
 			if ((columnIndex == amountOfColumns-1) && (this->rows[rowIndex][columnIndex] == 0))
 			{
-				currentPivotColumn = amountOfColumns + 1;
+				lastPivotEntryColumn = amountOfColumns + 1;
 			}
 		}
-		endOfCheck:
-			break;
 	}
-	return isEchelonForm;
+	endOfCheck:
+		return isEchelonForm;
 }
+
 
 /*
  * Function: echelonForm()
@@ -379,6 +379,19 @@ std::string Matrix::toString()
 		}
 	}
 	return stringOfMatrix;
+}
+
+/*
+ * Function: insertAt(number, rowIndex, columnIndex)
+ * Parameters: float, int, int
+ * Return: void
+ * Author: Lam Duong
+ * Description: A public function that allows the insertion of a float into
+ * 				the matrix at a specified coordinate (row/column index).
+ */
+void Matrix::insertAt(float number, int rowIndex, int columnIndex)
+{
+	this->rows[rowIndex][columnIndex] = number;
 }
 
 /* ACCESSOR MEMBER FUNCTIONS */
