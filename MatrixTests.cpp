@@ -128,6 +128,10 @@ TEST_CASE("isEchelonForm() Tests")
 	REQUIRE(matrix1.isEchelonForm() == true);
 	matrix1.insertAt(float(1),4,1);
 	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(0),4,1);
+	REQUIRE(matrix1.isEchelonForm() == true);
 	matrix1.insertAt(float(2),0,2);
 	REQUIRE(matrix1.isEchelonForm() == true);
+	//std::string matrixString = matrix1.toString();
+	//std::cout << matrixString;
 }

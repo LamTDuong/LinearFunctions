@@ -151,22 +151,23 @@ void Matrix::randomizeMatrix()
 bool Matrix::isEchelonForm()
 {
 	bool isEchelonForm = true;
-	int lastPivotEntryColumn = -1;
+	int pivotEntryColumn = -1;
 	for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
 	{
 		for (int columnIndex = 0; columnIndex < amountOfColumns; columnIndex++)
 		{
 			if (this->rows[rowIndex][columnIndex] != 0)
 			{	
-				// If it's a a non-zero entry before or on the last pivot entry, return false
-				if (columnIndex <= lastPivotEntryColumn)
+				// If it's a a non-zero entry before or on the last pivot entry column, return false
+				if (columnIndex <= pivotEntryColumn)
 				{
 					isEchelonForm = false;
 					goto endOfCheck; // to break out of double loop
 				}
-				else if (columnIndex > lastPivotEntryColumn)
+				// else move onto the next row and update the next pivot entry column
+				else if (columnIndex > pivotEntryColumn)
 				{
-					lastPivotEntryColumn = columnIndex;
+					pivotEntryColumn = columnIndex;
 					break;
 				}
 			}
@@ -176,7 +177,7 @@ bool Matrix::isEchelonForm()
 			// row, it will return false
 			if ((columnIndex == amountOfColumns-1) && (this->rows[rowIndex][columnIndex] == 0))
 			{
-				lastPivotEntryColumn = amountOfColumns + 1;
+				pivotEntryColumn = amountOfColumns + 1;
 			}
 		}
 	}
