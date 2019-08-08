@@ -10,8 +10,7 @@
 #include <vector>
 #include <string>
 #include <sstream>		/* parsing integers */
-#include <stdlib.h>     /* rand */
-#include <time.h> 		/* for rand seed */
+#include <random>
 #include "Matrix.hpp"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
@@ -121,19 +120,18 @@ void Matrix::populateMatrix()
  * Function: randomizeMatrix()
  * Return: void
  * Author: Lam Duong
- * Description: Populate the matrix with random numbers generated
-				by an RNG with a seed of the seconds that have passed
-				since 01/01/1970
+ * Description: Populate the matrix with random numbers generated.
  */
 void Matrix::randomizeMatrix()
 {
-	srand (time(NULL)); // random seed every second
-	int randomInteger;
+	std::random_device randomDevice; // initialize seed engine
+	std::mt19937 rng(randomDevice()); // Mersenne-Twister random number engine
+	std::uniform_int_distribution<int> uni(0,10); // guaranteed unbiased
 	for (int i = 0; i < this->amountOfRows; i++)
 	{
 		for (int j = 0; j < this->amountOfColumns; j++)
 		{
-			randomInteger = rand() % 10;
+			auto randomInteger = uni(rng);
 			this->rows[i][j] = float(randomInteger);
 		}
 	}
