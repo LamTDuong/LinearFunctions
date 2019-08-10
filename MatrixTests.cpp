@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 
-TEST_CASE("Constructor tests", "[Matrix]")
+TEST_CASE("Constructor tests")
 {
 	Matrix matrix1(1, 1);
 	Matrix matrix2(2, 1);
@@ -52,7 +52,7 @@ TEST_CASE("Constructor tests", "[Matrix]")
 // NOTE: Test case running randomize matrix function 4 times that wait
 // for 1 second each. With 2 randomize functions, expect test to run for 8 seconds.
 
-TEST_CASE("Ranomize Matrix Tests", "[Matrix]")
+TEST_CASE("Randomize Matrix Tests")
 {
 	Matrix matrix1(1, 1);
 	Matrix matrix2(2, 1);
@@ -98,20 +98,44 @@ TEST_CASE("Ranomize Matrix Tests", "[Matrix]")
 
 TEST_CASE("isEchelonForm() Tests")
 {
+	/* Populating a matrix that looks like this:
+	 *	1 0 2 3 4
+	 *	0 1 5 6 7
+	 *	0 0 0 1 8
+	 * 	0 0 0 0 1 */
 	Matrix matrix1;
-	matrix1.insertAt(float(1),0,0);
 	REQUIRE(matrix1.isEchelonForm() == true);
-	matrix1.insertAt(float(1),1,0);
-	std::string matrixStringCheck = matrix1.toString();
-	REQUIRE(matrix1.isEchelonForm() == false);
-	matrix1.insertAt(float(0),1,0);
+	matrix1.insertAt(float(4),0,4);
 	REQUIRE(matrix1.isEchelonForm() == true);
-	matrix1.insertAt(float(1),4,1);
-	REQUIRE(matrix1.isEchelonForm() == false);
-	matrix1.insertAt(float(0),4,1);
+	matrix1.insertAt(float(3),0,3);
 	REQUIRE(matrix1.isEchelonForm() == true);
 	matrix1.insertAt(float(2),0,2);
 	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(7),1,4);
+	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(6),1,3);
+	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(5),1,2);
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(1),1,1);
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(1),0,0);
+	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(1),3,4);
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(8),2,4);
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(1),2,3);
+	REQUIRE(matrix1.isEchelonForm() == true);
+	matrix1.insertAt(float(11),3,0);
+	REQUIRE(matrix1.isEchelonForm() == false);
+	matrix1.insertAt(float(0),3,0);
+	REQUIRE(matrix1.isEchelonForm() == true);
 	//std::string matrixString = matrix1.toString();
 	//std::cout << matrixString;
+}
+
+TEST_CASE("Row Reduced Tests")
+{
+	
 }

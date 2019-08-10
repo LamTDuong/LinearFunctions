@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>		/* parsing integers */
 #include <random>
+#include <map>
 #include "Matrix.hpp"
 
 // Matrix default constructor creating a 5x5 matrix filled with 0's
@@ -183,7 +184,6 @@ bool Matrix::isEchelonForm()
 		return isEchelonForm;
 }
 
-
 /*
  * Function: echelonForm()
  * Parameters:  none
@@ -204,29 +204,46 @@ void Matrix::echelonForm()
 		The pivot position should be at the top.
 		*/
 		
-		// Find the leftmost nonzero column
-		int leftMostColumn = amountOfColumns; // set left-most column to the last column initially
-		std::vector<std::vector<float>> pivotRows;
-		std::vector<int> pivotRowIndices;
+		// Find the leftmost nonzero column index.
+		int leftMostNonZeroColumnIndex = amountOfColumns-1; // set left-most column to the last column initially
 		for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
 		{
 			for (int columnIndex = 0; columnIndex < amountOfColumns; columnIndex++)
 			{
-				if ((rows[rowIndex][columnIndex] != 0) && (columnIndex < leftMostColumn))
+				if ((rows[rowIndex][columnIndex] != 0) && (columnIndex <= leftMostNonZeroColumnIndex))
 				{
-					leftMostColumn = columnIndex;
-					pivotRows.push_back(rows[rowIndex]);
-					pivotRowIndices.push_back(rowIndex);
+					leftMostNonZeroColumnIndex = columnIndex;
 				}
 			}
 		}
+
+		// Find a list of pivot rows
+		std::map<std::vector<float>, int> pivotRows;
+		for (int rowIndex = 0; rowIndex < amountOfRows; rowIndex++)
+		{
+			if (rows[rowIndex][leftMostNonZeroColumnIndex] != 0)
+			{
+				pivotRows[rows[rowIndex]] = rowIndex;
+			}
+		}
+
 		// Determine one row to be the pivot row
 		std::vector<float> pivotRow;
-		for (int rowIndex = 0; rowIndex < pivotRows.size(); rowIndex++)
+		if (pivotRows.empty())
 		{
-			
+			goto exit; 	// If no pivot rows are found, it is likely that
+						// the matrix is empty. Exit function.
 		}
-		// Move row tha row to the top
+		for (int vectorIndex = 0; vectorIndex < pivotRows.size(); vectorIndex++)
+		{
+			if (pivotRows[vectorIndex][leftMostNonZeroColumnIndex] == 1)
+			{
+				
+			}
+		}
+
+		
+		// Move that row to the top
 
 		/*							STEP 2:
 		2) Select a nonzero entry in the pivot column as a pivot. If necessary,
@@ -249,6 +266,8 @@ void Matrix::echelonForm()
 		create zeros above each pivot. If a pivot is not 1, make it 1 by a scaling operation.
 		*/
 	}
+	exit:
+		return;
 }
 
 /*
